@@ -10,8 +10,21 @@ from faker import Faker
 from app import app
 from models import db
 
+fake = Faker()
+
+class FordMustang:
+    def __init__(self, image):
+        self.model = "Mustang"
+        self.year = fake.random_int(min=1965, max=2004)
+        self.color = fake.color_name()
+        self.price = fake.random_float(min=4999.99, max=125000.99)
+        self.image = image
+
+    def __repr__(self):
+        return f"<FordMustang {self.year} {self.color} - Image: {self.image}>"
+
 if __name__ == '__main__':
-    fake = Faker()
     with app.app_context():
         print("Starting seed...")
-        # Seed code goes here!
+        # Generate 10 instances of FordMustang with random image URLs
+        mustangs = [FordMustag(fake.image_url()) for _ in range(10)]
