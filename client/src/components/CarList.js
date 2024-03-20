@@ -5,7 +5,7 @@ function CarList({ cars, toggleStockStatus }) {
   return (
     <ul className="cars">
       {cars.map((car) => (
-        <CarCard key={car.id} car={car} toggleStockStatus= {toggleStockStatus}  />
+        <CarCard key={car.id} car={car} year={car.year} color={car.color} mileage={car.miles} price={car.price} toggleStockStatus= {toggleStockStatus}  />
       ))}
     </ul>
   );
