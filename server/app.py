@@ -5,10 +5,13 @@ from flask import Flask, request, make_response, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate 
 # Remote library imports
-from flask_restful import Resource
+# from flask_restful import Resource
 # Local imports
-from config import app, db, api
+from config import app, db
+#api
+from models import FordMustang, Bid, User
 # Add your model imports
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
