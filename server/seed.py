@@ -8,7 +8,8 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db
+from config import db 
+from models import FordMustang, Bid, User
 
 fake = Faker()
 
@@ -27,4 +28,4 @@ if __name__ == '__main__':
     with app.app_context():
         print("Starting seed...")
         # Generate 10 instances of FordMustang with random image URLs
-        mustangs = [FordMustag(fake.image_url()) for _ in range(10)]
+        mustangs = [FordMustang(fake.image_url()) for _ in range(10)]

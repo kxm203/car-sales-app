@@ -1,10 +1,10 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-from flask_sqlalchemy import sqlalchemy
+# from flask_sqlalchemy import sqlalchemy
 
 from config import db
 
-db = SQLAlchemy()
+
 # Models go here!
 
 class FordMustang(db.Model, SerializerMixin):
@@ -26,7 +26,7 @@ class Bid(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Float, nullable=False)
-    user_id = db.Cloumn(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', back_populates='bids')
 
     def __repr__(self):
@@ -39,13 +39,13 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    bids = db.relationship('Bid', backpopulates='user')
+    bids = db.relationship('Bid', back_populates='user')
 
     def __repr__(self):
         return f'<User {self.username}>'
 
 ford_mustang_bid_association = db.Table('ford_mustang_bid_asscoiation',
-    db.Column('ford_mustang_id', db.Ineger, db.ForeignKey('ford_mustangs.id')),
+    db.Column('ford_mustang_id', db.Integer, db.ForeignKey('ford_mustangs.id')),
     db.Column('bid.id', db.Integer, db.ForeignKey('bids.id'))
 )     
 
