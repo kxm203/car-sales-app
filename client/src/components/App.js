@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+
+import Header from "./Header";
+import MustangPage from "./MustangPage";
 
 function App() {
-  return <h1>Project Client</h1>;
+  return (
+    <div className="app">
+      <Header />
+      <MustangPage />
+    </div>
+  );
 }
 
 export default App;
