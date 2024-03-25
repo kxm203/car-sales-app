@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CarCard({ car }) {
+function MustangCard({ mustang }) {
     const [isInStock, setIsInStock] = useState(true);
 
     const toggleStockStatus = () => {
@@ -8,10 +8,10 @@ function CarCard({ car }) {
     };
 
     return (
-        <li className="card" data-testid="car-item">
-            <img src={car.image} alt={car.year} />
-            <h4>{car.year}, {car.color}</h4>
-            <p>Price: ${car.price}</p>
+        <li className="card" data-testid="mustang-item">
+            <img src={mustang.image} alt={mustang.year} />
+            <h4>{mustang.year}, {mustang.color}</h4>
+            <p>Price: ${mustang.price}</p>
             {isInStock ? (
                 <button className="primary" onClick={toggleStockStatus}>In Stock</button>
             ) : (
@@ -21,4 +21,4 @@ function CarCard({ car }) {
     );
 }
 
-export default CarCard;
+export default MustangCard;

@@ -1,8 +1,29 @@
 import React from "react";
-import App from "./components/App";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import { createRoot } from "react-dom/client";
+import App from "./components/App";
+import ErrorPage from "./components/ErrorPage.js";
+import MustangPage from "./components/MustangPage.js";
+import NewMustangForm from "./components/NewMustangForm.js";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(<App />);
+const router = BrowserRouter([
+    {
+        path: "/",
+        element: <App />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: "/Mustangs",
+        element: <MustangPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: "/AddMustang",
+        element: <NewMustangForm />,
+        errorElement: <ErrorPage />
+    }
+]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(router);
