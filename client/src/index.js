@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import  { RouterProvider, createBrowserRouter } from  "react-router-dom"
 import "./index.css";
 import App from "./components/App";
 import ErrorPage from "./components/ErrorPage.js";
 import MustangPage from "./components/MustangPage.js";
 import NewMustangForm from "./components/NewMustangForm.js";
 
-const router = BrowserRouter([
+const routes = [
     {
         path: "/",
         element: <App />,
@@ -23,7 +23,13 @@ const router = BrowserRouter([
         element: <NewMustangForm />,
         errorElement: <ErrorPage />
     }
-]);
+];
+
+const router = createBrowserRouter(routes)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(router);
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);

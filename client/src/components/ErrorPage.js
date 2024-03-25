@@ -1,4 +1,4 @@
-import NavBar from "./NavBar";
+// import NavBar from "./NavBar";
 import { useLocation } from "react-router-dom";
 
 function ErrorPage() {
@@ -11,7 +11,7 @@ function ErrorPage() {
     return (
         <>
             <header>
-                <NavBar />
+                {/* <NavBar /> */}
             </header>
             <main style={{ textAlign: 'center' }}>
                 <h1>Yikes! You selected something that wasn't available!</h1>
