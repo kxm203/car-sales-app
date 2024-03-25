@@ -1,11 +1,12 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 # from flask_sqlalchemy import sqlalchemy
-
+from faker import Faker
 from config import db
 
 
 # Models go here!
+fake = Faker()
 
 class FordMustang(db.Model, SerializerMixin):
     __tablename__ = 'ford_mustangs'
@@ -50,4 +51,20 @@ ford_mustang_bid_association = db.Table('ford_mustang_bid_asscoiation',
 )     
 
 
+class FordMustang:
+    def __init__(self, image):
+        self.model = "Mustang"
+        self.year = fake.random_int(min=1965, max=2004)
+        self.color = fake.color_name()
+        self.price = fake.random_float(min=4999.99, max=125000.99)
+        self.image = image
+
+    def __repr__(self):
+        return f"<FordMustang {self.year} {self.color} - Image: {self.image}>"
+
+if __name__ == '__main__':
+    with app.app_context():
+        print("Starting seed...")
+        # Generate 10 instances of FordMustang with random image URLs
+        mustangs = [FordMustang(fake.image_url()) for _ in range(10)]
 
