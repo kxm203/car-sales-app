@@ -1,12 +1,13 @@
 import React from "react";
-import mustangsImage from "./mustangs.jpg"; // Import your image
 
 function Header() {
   return (
     <header>
       <h1>
         Classic Mustangs
-        <img src={mustangsImage} alt="Mustangs" className="logo" /> {/* Replace the emoji with the image */}
+        <span className="logo" role="img">
+        🚗
+        </span>
       </h1>
     </header>
   );
