@@ -5,22 +5,22 @@ import MustangPage from "./MustangPage";
 
 function App() {
   const [theme, setTheme] = useState('light')
-  
+
   const appClass = theme === 'dark' ? "App dark" : "App light";
-  
+
   const handleDarkModeToggle = () => {
       setTheme(theme === 'light' ? 'dark' : 'light');
     };
-        
-       
+
+
     return (
       <div className={appClass}>
         <header>
-         <Header/>
+         <Header />
         <button onClick={handleDarkModeToggle}>
           {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
           </button>
-        </header>   
+        </header>
         <MustangPage  />
         </div>
     );
