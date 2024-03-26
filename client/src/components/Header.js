@@ -1,13 +1,12 @@
 import React from "react";
 
+
 function Header() {
   return (
     <header>
       <h1>
         Classic Mustangs
-        <span className="logo" role="img">
-        🚗
-        </span>
+        <img src="🚗" alt="Mustangs" className="logo" />
       </h1>
     </header>
   );
