@@ -9,37 +9,28 @@ from flask_migrate import Migrate
 # Local imports
 from config import app, db
 #api
-from models import FordMustang, Bid, User
+from models import Mustang, Bid, User
 # Add your model imports
 
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
 
-CORS(app)
-migrate = Migrate(app,db)
-db.init_app(app)
 
 # Views go here!
 
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
 
-@app.route('/mustangs', methods=['GET', 'POST'])
-def mustangs():
+
+@app.route('/users', methods=['GET', 'POST'])
+def all_users():
+    users = User.query.all()
+    users_list = [user.to_dict() for user in users]
     if request.method == 'GET':
-        mustangs = FordMustang.query.order_by('created_at').all()
-
-        response = make_response(
-            jsonify([mustang.to_dict() for mustang in mustangs]),
-            200,
-        )
+       
+        return make_response(users_list)
+   
+    
     elif request.method == 'POST':
         data = request.get_json()
-        mustang = FordMustang(
+        mustang = Mustang(
             model=data['model'],
             year=data['year'],
             color=data['color'],
@@ -54,31 +45,26 @@ def mustangs():
         )
     return response
 
-@app.route('/mustangs/<int:id>', methods=['PATCH', 'DELETE'])
-def mustangs_by_id(id):
-    mustang = FordMustang.query.filter_by(id=id).first()
-
+@app.route('/users/<int:id>', methods=['PATCH', 'DELETE'])
+def user_by_id(id):
+    user = User.query.get(id)
+    # user = User.query.filter_by(id=id).first()
+    
     if request.method == 'PATCH':
-        data = request.get_json()
-        for attr in data:
-            setattr(mustang, attr, data[attr])
+        params = request.json
+        for attr in params:
+            setattr(user, attr, params[attr])
 
-        db.session.add(mustang)
+        db.session.add(user)
         db.session.commit()
 
-        response = make_response(
-            jsonify(mustang.to_dict()),
-            200,
-        )
+        return make_response(user.to_dic())
 
     elif request.method =='DELETE':
-        db.session.delete(mustang)
+        db.session.delete(user)
         db.session.commit()
 
-        response = make_reponse(
-            jsonify({'deleted': True}),
-            200,
-        )
+        return make_reponse( ' ', 204) 
 
 
 if __name__ == '__main__':
