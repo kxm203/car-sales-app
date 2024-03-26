@@ -10,18 +10,19 @@ import NewMustangForm from "./components/NewMustangForm.js";
 const routes = [
     {
         path: "/",
-        element: <App />,
-        errorElement: <ErrorPage />
+        element: <App />
     },
     {
         path: "/Mustangs",
-        element: <MustangPage />,
-        errorElement: <ErrorPage />
+        element: <MustangPage />
     },
     {
         path: "/AddMustang",
-        element: <NewMustangForm />,
-        errorElement: <ErrorPage />
+        element: <NewMustangForm />
+    },
+    {
+        path: "*",
+        element: <ErrorPage />,
     }
 ];
 
