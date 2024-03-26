@@ -1,7 +1,126 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+/* Light theme styles */
+.App.light {
+  background-color: #fff; /* Light background */
+  color: #000; /* Dark text */
+}
+
+/* Dark theme styles */
+.App.dark {
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text */
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.get-building-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #e41414;
+  justify-content: center;
+  font-size: 36px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.welcome-heading {
+  margin-bottom: 20px;
+}
+
+.header-container {
+  text-align: center; 
+  padding: 20px; 
+}
+
+.header-title {
+  margin: 0; 
+}
+
+.logo {
+  font-size: 24px; 
+}
+
+.mustang-image {
+  width: 700px;
+  height: auto;
+  margin-bottom: 20px;
+  transition: transform 0.1s ease;
+} 
+
+.mustang-image:hover {
+  transform: scale(1.1);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  box-shadow: 0 0 7px 0 #ddd;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 225px;
+  min-height: 100px;
+}
+
+.card img {
+  width: 90%;
+  height: 250px;
+  object-fit: contain;
+  margin-right: 1rem;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.mustang-card .card img {
+  width: 300px;
+  height: 300px;
+}
+
+.mustang-card, .cook-card, .dine-card, .fixins-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; 
+}
+
+
+
+.go-back-link,
+.done-link {
+  display: flex;
+  color: #e10909;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.list-item {
+  list-style: none;
+}
