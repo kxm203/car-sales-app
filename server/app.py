@@ -23,13 +23,11 @@ from models import Mustang, Bid, User
 def all_users():
     users = User.query.all()
     users_list = [user.to_dict() for user in users]
-    return make_response(users_list)
+    if request.method == 'GET':
+       
+        return make_response(users_list)
    
-    # if request.method == 'GET':
-    #   response = make_response(
-    #         jsonif),
-    #         200,
-        )
+    
     elif request.method == 'POST':
         data = request.get_json()
         mustang = Mustang(
@@ -69,6 +67,6 @@ def user_by_id(id):
         return make_reponse( ' ', 204) 
 
 
-# if __name__ == '__main__':
-#     app.run(port=5555, debug=True)
+if __name__ == '__main__':
+    app.run(port=5555, debug=True)
 
