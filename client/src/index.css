@@ -1,7 +1,101 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+/* Global styles */
+body {
+  margin: 1;
+  font-family: Arial, sans-serif;
 }
 
+/* App component styles */
+.App {
+  padding: 50px;
+}
+
+.dark {
+  background-color: #333; /* Dark mode background color */
+  color: #fff; /* Dark mode text color */
+}
+
+.light {
+  background-color: #fff; /* Light mode background color */
+  color: #333; /* Light mode text color */
+}
+
+/* Header component styles */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* MustangPage component styles */
+.mustang-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mustang-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.mustang-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 16px;
+}
+
+.mustang-subtitle {
+  font-size: 16px;
+  color: #666;
+}
+
+.mustang-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.mustang-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(33.333% - 16px);
+  margin-bottom: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.mustang-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.mustang-card-content {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.mustang-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
