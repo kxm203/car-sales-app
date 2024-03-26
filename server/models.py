@@ -28,7 +28,7 @@ class Bid(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String, unique=True, nullable=False )
-    bid_amount = db.Column(db.Integer, unique=True, nullable=False)
+    bid_amount = db.Column(db.Integer, validates={'min':1000, 'max':500000}, unique=True, nullable=False)
     # start_amount = db.Column(db.Float, nullable=False)
     # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     # user = db.relationship('User', back_populates='bids')
@@ -48,6 +48,7 @@ class Mustang(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     color = db.Column(db.String)
+    price = db.Column(db.Integer)
 
     # bids = db.relationship('Bid', secondary='mustang_bid', back_populates='mustangs')
     # username = db.column(db.String)
