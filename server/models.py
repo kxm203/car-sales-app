@@ -28,12 +28,12 @@ class Bid(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String, unique=True, nullable=False )
-    bid_amount = db.Column(db.Interger, unique=True, nullable=False)
+    bid_amount = db.Column(db.Integer, unique=True, nullable=False)
     # start_amount = db.Column(db.Float, nullable=False)
     # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     # user = db.relationship('User', back_populates='bids')
-    user_id = db.Column(db.Integer, db.Foreign_Key('users.id'))
-    mustang_id = db.Column(db.Integer, db.Foreign_Key('mustangs_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    mustang_id = db.Column(db.Integer, db.ForeignKey('mustangs.id'))
     # def __repr__(self):
     #     return f'<Bid ${self.amount} by {self.user.username}>'
 
