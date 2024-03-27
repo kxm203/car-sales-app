@@ -11,7 +11,7 @@ function MustangCard({ mustang, toggleStockStatus }) {
   return (
     <li className="card" data-testid="mustang-item">
       <img src={mustang.image} alt={mustang.year} />
-      <h4>{mustang.year}, {mustang.color}</h4>
+      <h4>{mustang.year}, {mustang.color} </h4>
       <p>Price: ${mustang.price}</p>
       {isInStock ? (
         <button className="primary" onClick={handleClick}>In Stock</button>
