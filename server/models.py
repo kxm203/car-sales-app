@@ -1,6 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-# from flask_sqlalchemy import sqlalchemy
+from sqlalchemy.orm import validates
 # from faker import Faker
 from config import db
 
@@ -37,16 +37,16 @@ class User(db.Model, SerializerMixin):
 class Mustang(db.Model, SerializerMixin):
     __tablename__ = 'mustangs'
 
-    serialize_rules = ('-bids.mustang')
+    serialize_rules = ('-bids.mustang',)
 
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     color = db.Column(db.String)
-    # price = db.Column(db.Integer)
+    price = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    bids = db.relationship('Bid', back_populates='post', cascade='all, delete-orphan')
+    bids = db.relationship('Bid', back_populates='mustang', cascade='all, delete-orphan')
     users = association_proxy('bids,', 'user')
 
     # bids = db.relationship('Bid', secondary='mustang_bid', back_populates='mustangs')
@@ -60,7 +60,7 @@ class Mustang(db.Model, SerializerMixin):
 class Bid(db.Model, SerializerMixin):
     __tablename__ = 'bids'
 
-    serialize_rules = ('-bids.mustang', '-user.bid')
+    serialize_rules = ('-mustang.bids', '-user.bids')
 
     id = db.Column(db.Integer, primary_key=True)
     bid_amount = db.Column(db.Integer, unique=True, nullable=False)
@@ -80,7 +80,7 @@ class Bid(db.Model, SerializerMixin):
     #     return f'<Bid ${self.amount} by {self.user.username}>'
 
     mustang = db.relationship('Mustang', back_populates='bids')
-    user = db.relationship('User', back_populates='bid')
+    user = db.relationship('User', back_populates='bids')
 
  
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewMustangForm({ onSubmit }) {
+function NewMustangForm({ addMustang }) {
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
   const [color, setColor] = useState("");
@@ -8,7 +8,7 @@ function NewMustangForm({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ model, year, color, price });
+    addMustang({ model, year, color, price });
     setModel("");
     setYear("");
     setColor("");

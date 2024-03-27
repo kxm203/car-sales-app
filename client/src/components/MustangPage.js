@@ -28,9 +28,10 @@ function MustangPage() {
     };
     useEffect(() => {
         const filtered = mustangs.filter((mustang) =>
-        mustang.name.toLowerCase().includes(searchQuery.toLowerCase())
+        mustang.color.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredMustangs(filtered);
+        console.log(mustangs)
     }, [searchQuery, mustangs]);
 
     const handleSearch = (query) => {
