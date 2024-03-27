@@ -10,51 +10,44 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    # serialize_rule =
+    serialize_rules = ('-bids.user',)
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    username = db.Column(db.String(2), unique=True, nullable=False)
+    age = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     
-    # email = db.Column(db.String(120), unique=True, nullable=False)
-    # password_hash = db.Column(db.String(128), nullable=False)
-    # bids = db.relationship('Bid', back_populates='user')
-
     # def __repr__(self):
     #     return f'<User {self.username}>'
+    bids = db.relationship('Bid', back_populates='user')
+    bids_mustangs = association_proxy('bids', 'mustang')
 
+    __table_args__ = (
+        db.CheckConstraint('age > 21'),
+    )
 
-class Bid(db.Model):
-    __tablename__ = 'bids'
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False )
-    bid_amount = db.Column(db.Integer, unique=True, nullable=False)
-
-    @property
-    def validate_bid_amount(self, key, bid_amount):
-        if self.bid_amount < 1000 or self.bid_amount > 500000:
-            raise ValueError('Bid amount must be between 1000 and 500000.')
-        return bid_amount
-    # start_amount = db.Column(db.Float, nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    # user = db.relationship('User', back_populates='bids')
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    mustang_id = db.Column(db.Integer, db.ForeignKey('mustangs.id'))
-    # def __repr__(self):
-    #     return f'<Bid ${self.amount} by {self.user.username}>'
-
-# mustang_bid = db.Table('mustang_bid',
-#     db.Column('mustang_id', db.Integer, db.ForeignKey('mustangs.id')),
-#     db.Column('bid.id', db.Integer, db.ForeignKey('bids.id'))
-# )     
+    @validates('username')
+    def validate_username(self, key, new_username):
+        if len(new_username) <= 2:
+            raise ValueError('Username must be greater than 2 characters')
+        return new_username
+    
 
 class Mustang(db.Model, SerializerMixin):
     __tablename__ = 'mustangs'
 
+    serialize_rules = ('-bids.mustang')
+
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     color = db.Column(db.String)
-    price = db.Column(db.Integer)
+    # price = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    bids = db.relationship('Bid', back_populates='post', cascade='all, delete-orphan')
+    users = association_proxy('bids,', 'user')
 
     # bids = db.relationship('Bid', secondary='mustang_bid', back_populates='mustangs')
     # username = db.column(db.String)
@@ -62,3 +55,32 @@ class Mustang(db.Model, SerializerMixin):
     # updated_at = db.Column(de.DateTime, onupdate=db.func.now())
     # def __repr__(self):
     #     return f'<Mustang by {self.year} {self.color}>'
+
+
+class Bid(db.Model, SerializerMixin):
+    __tablename__ = 'bids'
+
+    serialize_rules = ('-bids.mustang', '-user.bid')
+
+    id = db.Column(db.Integer, primary_key=True)
+    bid_amount = db.Column(db.Integer, unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    @property
+    def validate_bid_amount(self, key, bid_amount):
+        if self.bid_amount < 1000 or self.bid_amount > 500000:
+            raise ValueError('Bid amount must be between 1000 and 500000.')
+        return bid_amount
+    
+    mustang_id = db.Column(db.Integer, db.ForeignKey('mustangs.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+   
+    # def __repr__(self):
+    #     return f'<Bid ${self.amount} by {self.user.username}>'
+
+    mustang = db.relationship('Mustang', back_populates='bids')
+    user = db.relationship('User', back_populates='bid')
+
+ 
+

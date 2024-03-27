@@ -20,7 +20,7 @@ from models import Mustang, Bid, User
 @app.route('/users', methods=['GET', 'POST'])
 def all_users():
     users = User.query.all()
-    users_list = [user.to_dict() for user in users]
+    users_list = [user.to_dict(rules= ('-mustangs')) for user in users]
     if request.method == 'GET':
        
         return make_response(users_list)
