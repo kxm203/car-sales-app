@@ -1,17 +1,11 @@
 import React from "react";
 
-function Search({ mustangs = [], onChange, value = "" }) {
-  const handleInputChange = (event) => {
-    const { value } = event.target;
-    onChange(value);
-  };
-
-
-  const filteredMustangs = Array.isArray(mustangs)
-    ? mustangs.filter((mustang) =>
-        mustang.model.toLowerCase().includes(value.toLowerCase())
-      )
-    : [];
+function Search({onChange}) {
+const handleInputChnage = (event) => {
+  const { value } = event.target;
+  onChange(value);
+  console.log("Searching...")
+}
 
   return (
     <div className="searchbar">
@@ -19,20 +13,9 @@ function Search({ mustangs = [], onChange, value = "" }) {
       <input
         type="text"
         id="search"
-        placeholder="Type model name to search..."
-        value={value}
-        onChange={handleInputChange}
+        placeholder="Type a Year to search..."
+        onChange= {handleInputChnage}
       />
-
-      {value && (
-        <ul>
-          {filteredMustangs.map((mustang) => (
-            <li key={mustang.model}>
-              {mustang.model} {mustang.year} {mustang.color}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
