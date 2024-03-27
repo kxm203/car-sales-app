@@ -3,6 +3,7 @@ import NewMustangForm from "./NewMustangForm";
 import MustangList from "./MustangList";
 import Search from "./Search";
 
+
 function MustangPage() {
     const [mustangs, setMustangs] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +27,7 @@ function MustangPage() {
         })
     };
     useEffect(() => {
-        const filtered = mustangs.filter((mustang) => 
+        const filtered = mustangs.filter((mustang) =>
         mustang.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredMustangs(filtered);
@@ -35,7 +36,7 @@ function MustangPage() {
     const handleSearch = (query) => {
         setSearchQuery(query);
     };
-    
+
     const updateMustangBid = (mustangId, number) => {
         fetch(`http://localhost:5555/mustangs/${mustangId}`, {
             method: "PATCH",
@@ -51,7 +52,7 @@ function MustangPage() {
             );
         })
     };
-    
+
     const deleteMustang = (mustangId) => {
         fetch(`http://localhost:5555/mustangs/${mustangId}`, {
             method:"DELETE",
