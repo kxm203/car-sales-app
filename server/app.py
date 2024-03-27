@@ -17,8 +17,6 @@ from models import Mustang, Bid, User
 
 # Views go here!
 
-
-
 @app.route('/users', methods=['GET', 'POST'])
 def all_users():
     users = User.query.all()
@@ -30,20 +28,18 @@ def all_users():
     
     elif request.method == 'POST':
         data = request.get_json()
-        mustang = Mustang(
-            model=data['model'],
-            year=data['year'],
-            color=data['color'],
-            price=data['price'],
+        user = User(
+            username=data['username'],
         )
-        db.session.add(mustang)
+        db.session.add(user)
         db.session.commit()
 
         response = make_response(
-            jsonify(message.to_dict()),
+            jsonify(user.to_dict()),
             201,
         )
     return response
+
 
 @app.route('/users/<int:id>', methods=['PATCH', 'DELETE'])
 def user_by_id(id):
@@ -58,13 +54,116 @@ def user_by_id(id):
         db.session.add(user)
         db.session.commit()
 
-        return make_response(user.to_dic())
+        return make_response(user.to_dict())
 
     elif request.method =='DELETE':
         db.session.delete(user)
         db.session.commit()
 
-        return make_reponse( ' ', 204) 
+        return make_response( ' ', 204) 
+
+
+
+@app.route('/mustangs', methods=['GET', 'POST'])
+def all_mustangs():
+    if request.method == 'GET':
+        mustangs = Mustang.query.all()
+        mustangs_list = [mustang.to_dict() for mustang in mustangs]
+        return make_response(mustangs_list)
+   
+    
+    if request.method == 'POST':
+        data = request.get_json()
+        # Create a new Mustang
+        mustang = Mustang(
+            year=data['year'],
+            color=data['color'],
+            price=data['price'],
+        )
+        db.session.add(mustang)
+        db.session.commit()
+
+
+        response = make_response(
+            jsonify(mustang.to_dict()),
+            201,
+        )
+    return response
+
+@app.route('/mustangs/<int:id>', methods=['PATCH', 'DELETE'])
+def mustang_by_id(id):
+    mustang = Mustang.query.get(id)
+    
+    if request.method == 'PATCH':
+        params = request.json
+        for attr in params:
+            setattr(mustang, attr, params[attr])
+
+        db.session.add(mustang)
+        db.session.commit()
+
+        return make_response(mustang.to_dict())
+
+    elif request.method =='DELETE':
+        db.session.delete(mustang)
+        db.session.commit()
+
+        return make_response("message:" "Mustang was deleted.", 204) 
+
+@app.route('/bids', methods=['GET', 'POST'])
+def all_bids():
+    if request.method == 'GET':
+        bids = Bid.query.all()
+        bids_list = [bid.to_dict() for bid in bids]
+        return make_response(bids_list)
+   
+    
+    if request.method == 'POST':
+        data = request.get_json()
+        # Create a new bid
+        try:
+            bid = Bid(
+                username=data['username'],
+                bid_amount=data['bid_amount'],
+                user_id=data['user_id'],
+                mustang_id=data['mustang_id'],
+            )
+            db.session.add(bid)
+            db.session.commit()
+
+
+            response = make_response(
+                jsonify(bid.to_dict()),
+                201,
+            )
+        except ValueError as e:
+            db.session.rollback()
+
+            response = make_response(
+                jsonify(message=str(e)),
+                400,
+            )
+    return response
+
+@app.route('/bids/<int:id>', methods=['PATCH', 'DELETE'])
+def bid_by_id(id):
+    bid = Bid.query.get(id)
+    
+    if request.method == 'PATCH':
+        params = request.json
+        for attr in params:
+            setattr(bid, attr, params[attr])
+
+        db.session.add(bid)
+        db.session.commit()
+
+        return make_response(bid.to_dict())
+
+    elif request.method =='DELETE':
+        db.session.delete(bid)
+        db.session.commit()
+
+        return make_response("message:" "Bid was deleted.", 204) 
 
 
 if __name__ == '__main__':

@@ -27,8 +27,14 @@ class Bid(db.Model):
     __tablename__ = 'bids'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String, unique=True, nullable=False )
+    username = db.Column(db.String, unique=True, nullable=False )
     bid_amount = db.Column(db.Integer, unique=True, nullable=False)
+
+    @property
+    def validate_bid_amount(self, key, bid_amount):
+        if self.bid_amount < 1000 or self.bid_amount > 500000:
+            raise ValueError('Bid amount must be between 1000 and 500000.')
+        return bid_amount
     # start_amount = db.Column(db.Float, nullable=False)
     # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     # user = db.relationship('User', back_populates='bids')
@@ -48,6 +54,7 @@ class Mustang(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
     color = db.Column(db.String)
+    price = db.Column(db.Integer)
 
     # bids = db.relationship('Bid', secondary='mustang_bid', back_populates='mustangs')
     # username = db.column(db.String)
