@@ -2,12 +2,11 @@
 
 # Standard library imports
 from flask import Flask, request, make_response, jsonify
-from flask_cors import CORS
 from flask_migrate import Migrate 
 # Remote library imports
 # from flask_restful import Resource
 # Local imports
-from config import app, db
+from config import app, CORS, db 
 #api
 from models import Mustang, Bid, User
 # Add your model imports
@@ -123,9 +122,9 @@ def all_bids():
         # Create a new bid
         try:
             bid = Bid(
-                username=data['username'],
+                # username=data['username'],
                 bid_amount=data['bid_amount'],
-                user_id=data['user_id'],
+                user_id=1,
                 mustang_id=data['mustang_id'],
             )
             db.session.add(bid)
