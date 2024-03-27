@@ -1,14 +1,17 @@
 import React from "react";
 
-function Search({ mustangs, onChange, value = "" }) {
+function Search({ mustangs = [], onChange, value = "" }) {
   const handleInputChange = (event) => {
     const { value } = event.target;
     onChange(value);
   };
 
-  const filteredMustangs = mustangs.filter((mustang) =>
-    mustang.model.toLowerCase().includes(value.toLowerCase())
-  );
+
+  const filteredMustangs = Array.isArray(mustangs)
+    ? mustangs.filter((mustang) =>
+        mustang.model.toLowerCase().includes(value.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="searchbar">
