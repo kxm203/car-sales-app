@@ -79,8 +79,13 @@ body {
 
 /* .content-container styles */
 .content-container {
-  margin-top: 100px; /* Adjust margin to create space below the header */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the components horizontally */
+  justify-content: space-between; /* Add space between the components */
+  margin-top: 50px; /* Adjust margin as needed */
 }
+
 
 
 .MustangPage {
