@@ -68,5 +68,5 @@ The Bid class manages individual bids by users on car listings, and interacts wi
 Kenny McClelland\
 Isaac Cotton\
 TaKeya McFadden
-test
+
 ---
