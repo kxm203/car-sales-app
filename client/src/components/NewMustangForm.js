@@ -5,7 +5,7 @@ function NewMustangForm({ addMustang }) {
   const [year, setYear] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,15 +50,6 @@ function NewMustangForm({ addMustang }) {
         value={price}
         onChange={(event) => setPrice(event.target.value)}
       />
-
-      <label htmlFor="imageUrl">Image URL:</label>
-      <input
-        type="text"
-        id="imageUrl"
-        value={imageUrl}
-        onChange={(event) => setImageUrl(event.target.value)}
-      />
-
 
       <button type="submit">Submit</button>
 
