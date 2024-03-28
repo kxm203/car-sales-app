@@ -43,6 +43,7 @@ class Mustang(db.Model, SerializerMixin):
     year = db.Column(db.Integer)
     color = db.Column(db.String)
     price = db.Column(db.Integer)
+    image_url = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
