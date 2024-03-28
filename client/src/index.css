@@ -1,21 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
-
 body {
   margin: 0;
+  top: 75;
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://images.alphacoders.com/595/595433.jpg');
+  background-size: cover;
+  background-position:  center top;
 }
 
 /* Light theme styles */
 .App.light {
-  background-color: #fff; /* Light background */
+  background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
   color: #333; /* Dark text */
 }
 
 /* Dark theme styles */
 .App.dark {
-  background-color: #333; /* Dark background */
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
   color: #fff; /* Light text */
 }
 
@@ -24,13 +26,13 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #1c1c1c;
-  color: #fff;
+  background-color: transparent; /* Transparent background */
   border-bottom: 1px solid #444;
   position: fixed;
   width: 100%;
   z-index: 10;
   box-sizing: border-box;
+  margin-top: 30px;
 }
 
 .Header h1 {
@@ -51,8 +53,39 @@ body {
   color: #ccc;
 }
 
+/* .header-container styles */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent; /* Dark background color */
+  color: black; /* Light text color */
+}
+
+/* .header-title styles */
+.header-title {
+  font-size: 4.5rem; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+}
+
+/* .logo styles */
+.logo {
+  width: 90px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-left: 10px; /* Add some spacing between text and logo */
+}
+
+/* .content-container styles */
+.content-container {
+  margin-top: 100px; /* Adjust margin to create space below the header */
+}
+
+
 .MustangPage {
-  padding: 100px 20px;
+  padding: 20px;
+  margin-top: 100px; /* Add margin between header and MustangPage */
   box-sizing: border-box;
 }
 
@@ -66,7 +99,7 @@ body {
 
 .card {
   box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.1);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
   padding: 1rem;
   text-align: center;
   border-radius: 5px;
@@ -83,6 +116,7 @@ body {
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
+  color: #000;
 }
 
 .card p {

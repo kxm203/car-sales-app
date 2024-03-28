@@ -21,6 +21,10 @@ const App = () => {
           {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
         </button>
       </header>
+      <br />
+      <br />
+      <br />
+      <br />
       <MustangPage />
     </div>
   );
