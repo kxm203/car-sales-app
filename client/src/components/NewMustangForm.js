@@ -9,7 +9,7 @@ function NewMustangForm({ addMustang }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addMustang({ imageUrl, year, color, price });
+    addMustang({ image_url: imageUrl, year, color, price });
     setImageUrl("");
     setYear("");
     setColor("");
@@ -19,14 +19,6 @@ function NewMustangForm({ addMustang }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="imageUrl">Image URL:</label>
-      <input
-        type="text"
-        id="imageUrl"
-        value={imageUrl}
-        onChange={(event) => setImageUrl(event.target.value)}
-      />
-
       <label htmlFor="year">Year:</label>
       <input
         type="number"
