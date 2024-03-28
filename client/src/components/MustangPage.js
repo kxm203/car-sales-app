@@ -54,9 +54,15 @@ function MustangPage() {
     };
 
     return (
-        <main>
+        <main className="main-container">
             <NewMustangForm addMustang={addMustang}/>
+            <br />
+            <br />
+            <br />
+            <br />
             <Search onChange={handleSearch}/>
+            <br />
+            <br />
             <MustangList mustangs={filteredMustangs} deleteMustang={deleteMustang} addMustang={addMustang}/>
         </main>
     );
