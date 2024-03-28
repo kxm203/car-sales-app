@@ -1,12 +1,11 @@
 body {
   margin: 0;
-  top: 75;
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url('https://images.alphacoders.com/595/595433.jpg');
   background-size: cover;
-  background-position:  center top;
+  background-position: center top;
 }
 
 /* Light theme styles */
@@ -86,6 +85,13 @@ body {
   margin-top: 50px; /* Adjust margin as needed */
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the components horizontally */
+  justify-content: center; /* Center the components vertically */
+  margin-top: 50px; /* Adjust margin as needed */
+}
 
 
 .MustangPage {
