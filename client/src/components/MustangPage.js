@@ -38,22 +38,6 @@ function MustangPage() {
         setSearchQuery(query);
     };
 
-    const updateMustangBid = (mustangId, number) => {
-        fetch(`http://localhost:5555/mustangs/${mustangId}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/JSON"},
-            body: JSON.stringify({"bids": number}),
-        })
-        .then((resp) => resp.json())
-        .then((updatedMustang) => {
-            setFilteredMustangs((prevMustangs) =>
-            prevMustangs.map((mustang) =>
-            mustang.id === updatedMustang.id ? updatedMustang : mustang
-            )
-            );
-        })
-    };
-
     const deleteMustang = (mustangId) => {
         fetch(`http://localhost:5555/mustangs/${mustangId}`, {
             method:"DELETE",
@@ -73,7 +57,7 @@ function MustangPage() {
         <main>
             <NewMustangForm addMustang={addMustang}/>
             <Search onChange={handleSearch}/>
-            <MustangList mustangs={filteredMustangs} updateMustangBid={updateMustangBid} deleteMustang={deleteMustang} addMustang={addMustang}/>
+            <MustangList mustangs={filteredMustangs} deleteMustang={deleteMustang} addMustang={addMustang}/>
         </main>
     );
 }
