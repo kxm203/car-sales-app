@@ -78,6 +78,7 @@ def all_mustangs():
             year=data['year'],
             color=data['color'],
             price=data['price'],
+            image_url = data.get('image_url')
         )
         db.session.add(mustang)
         db.session.commit()
@@ -107,7 +108,7 @@ def mustang_by_id(id):
         db.session.delete(mustang)
         db.session.commit()
 
-        return make_response("message:" "Mustang was deleted.", 204) 
+        return make_response("Mustang was deleted.", 204) 
 
 @app.route('/bids', methods=['GET', 'POST'])
 def all_bids():

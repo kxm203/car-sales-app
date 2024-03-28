@@ -1,30 +1,23 @@
 import React, { useState } from "react";
 
 function NewMustangForm({ addMustang }) {
-  const [model, setModel] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [year, setYear] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addMustang({ model, year, color, price });
-    setModel("");
+    addMustang({ image_url: imageUrl, year, color, price });
+    setImageUrl("");
     setYear("");
     setColor("");
     setPrice("");
+    setImageUrl("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="model">Model:</label>
-      <input
-        type="text"
-        id="model"
-        value={model}
-        onChange={(event) => setModel(event.target.value)}
-      />
-
       <label htmlFor="year">Year:</label>
       <input
         type="number"
@@ -49,7 +42,18 @@ function NewMustangForm({ addMustang }) {
         onChange={(event) => setPrice(event.target.value)}
       />
 
+      <label htmlFor="imageUrl">Image URL:</label>
+      <input
+        type="text"
+        id="imageUrl"
+        value={imageUrl}
+        onChange={(event) => setImageUrl(event.target.value)}
+      />
+
+
       <button type="submit">Submit</button>
+
+
     </form>
   );
 }
